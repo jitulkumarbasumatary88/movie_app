@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import '../helper/project_helper.dart';
 import '../model/project_model.dart';
+import '../repeated_function/drawer.dart';
 import '../repeated_function/search_bar.dart';
 import '../section_page/movie.dart';
 import '../section_page/tv_series.dart';
@@ -52,6 +53,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: DrawerFunction(),
       backgroundColor: const Color(0xFF121212),
       body: CustomScrollView(
         physics: const BouncingScrollPhysics(),
