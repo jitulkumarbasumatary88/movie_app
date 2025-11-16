@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:movie_app/home_page/home_page.dart';
 import '../authentication_page/sign_in_page.dart';
 
@@ -19,7 +20,7 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   void startApp() {
-    Timer(Duration(seconds: 5), () {
+    Timer(Duration(seconds: 3), () {
       User? user = FirebaseAuth.instance.currentUser;
 
       if (user != null) {
@@ -40,8 +41,11 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        color: Colors.blue,
-        child: Center(child: Image.asset("assets/logo.jpeg")),
+        color: Colors.black,
+        // child: Center(child: Image.asset("assets/star.json")),
+        child: Center(
+          child: Lottie.asset('assets/star.json', width: 200, height: 200),
+        ),
       ),
     );
   }
