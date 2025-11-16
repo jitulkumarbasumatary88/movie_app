@@ -99,7 +99,11 @@ class SignInPageState extends State<SignInPage> {
                       } catch (e) {
                         print('Login Error : $e');
                         ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text('Invalid Email or Password')),
+                          SnackBar(
+                            content: Center(
+                              child: Text('Invalid Email or Password'),
+                            ),
+                          ),
                         );
                       }
                     },
