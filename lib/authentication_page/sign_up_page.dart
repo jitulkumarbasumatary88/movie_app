@@ -145,9 +145,15 @@ class _SignUpPageState extends State<SignUpPage> {
                         );
                       } catch (e) {
                         print('Sign Up Error : $e');
-                        ScaffoldMessenger.of(
-                          context,
-                        ).showSnackBar(SnackBar(content: Text('Error : $e')));
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Center(
+                              child: Text(
+                                'Sign up failed. Please check your details.',
+                              ),
+                            ),
+                          ),
+                        );
                       }
                     },
                     child: const Text(
