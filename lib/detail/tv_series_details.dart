@@ -3,9 +3,9 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../helper/project_helper.dart';
 import '../home_page/home_page.dart';
 import '../model/project_model.dart';
-import '../repeated_function/review.dart';
-import '../repeated_function/slider.dart';
-import '../repeated_function/trailer_ui.dart';
+import '../repeated_function/review_screen.dart';
+import '../repeated_function/repeated_list.dart';
+import '../repeated_function/trailer_screen.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 class TvSeriesDetails extends StatefulWidget {
@@ -123,7 +123,7 @@ class _TvSeriesDetailsState extends State<TvSeriesDetails> {
             flexibleSpace: FlexibleSpaceBar(
               background: ClipRRect(
                 borderRadius: BorderRadius.circular(0),
-                child: TrailerWatch(trailerYtID: trailerKey),
+                child: TrailerScreen(trailerYtID: trailerKey),
               ),
             ),
           ),
@@ -199,7 +199,7 @@ class _TvSeriesDetailsState extends State<TvSeriesDetails> {
               if (reviews.isNotEmpty)
                 Padding(
                   padding: const EdgeInsets.only(left: 20, top: 10),
-                  child: ReviewUI(revDetails: reviews),
+                  child: ReviewScreen(revDetails: reviews),
                 ),
 
               Padding(
@@ -282,8 +282,8 @@ class _TvSeriesDetailsState extends State<TvSeriesDetails> {
                 ),
               ],
 
-              sliderList(similar, 'Similar Series', 'tv', similar.length),
-              sliderList(
+              repeatedList(similar, 'Similar Series', 'tv', similar.length),
+              repeatedList(
                 recommended,
                 'Recommended Series',
                 'tv',

@@ -4,9 +4,9 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../helper/project_helper.dart';
 import '../home_page/home_page.dart';
 import '../model/project_model.dart';
-import '../repeated_function/review.dart';
-import '../repeated_function/slider.dart';
-import '../repeated_function/trailer_ui.dart';
+import '../repeated_function/review_screen.dart';
+import '../repeated_function/repeated_list.dart';
+import '../repeated_function/trailer_screen.dart';
 
 class MovieDetails extends StatefulWidget {
   final int id;
@@ -120,7 +120,7 @@ class _MovieDetailsState extends State<MovieDetails> {
             flexibleSpace: FlexibleSpaceBar(
               background: ClipRRect(
                 borderRadius: BorderRadius.circular(0),
-                child: TrailerWatch(trailerYtID: trailerKey),
+                child: TrailerScreen(trailerYtID: trailerKey),
               ),
             ),
           ),
@@ -197,7 +197,7 @@ class _MovieDetailsState extends State<MovieDetails> {
               if (reviews.isNotEmpty)
                 Padding(
                   padding: const EdgeInsets.only(left: 20, top: 10),
-                  child: ReviewUI(revDetails: reviews),
+                  child: ReviewScreen(revDetails: reviews),
                 ),
 
               // Info
@@ -222,8 +222,8 @@ class _MovieDetailsState extends State<MovieDetails> {
                 ),
               ),
 
-              sliderList(similar, 'Similar Movies', 'movie', similar.length),
-              sliderList(
+              repeatedList(similar, 'Similar Movies', 'movie', similar.length),
+              repeatedList(
                 recommended,
                 'Recommended Movies',
                 'movie',

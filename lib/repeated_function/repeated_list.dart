@@ -4,7 +4,7 @@ import '../detail/movie_details.dart';
 import '../detail/tv_series_details.dart';
 import '../model/project_model.dart';
 
-Widget sliderList(
+Widget repeatedList(
   List<PreviewModel> items,
   String title,
   String type,

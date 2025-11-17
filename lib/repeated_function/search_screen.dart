@@ -5,14 +5,14 @@ import '../detail/checker.dart';
 import '../helper/project_helper.dart';
 import '../model/project_model.dart';
 
-class SearchBarFunction extends StatefulWidget {
-  const SearchBarFunction({super.key});
+class SearchScreen extends StatefulWidget {
+  const SearchScreen({super.key});
 
   @override
-  State<SearchBarFunction> createState() => _SearchBarFunctionState();
+  State<SearchScreen> createState() => _SearchScreenState();
 }
 
-class _SearchBarFunctionState extends State<SearchBarFunction> {
+class _SearchScreenState extends State<SearchScreen> {
   final ProjectHelper api = ProjectHelper();
   final TextEditingController _controller = TextEditingController();
   List<PreviewModel> results = [];

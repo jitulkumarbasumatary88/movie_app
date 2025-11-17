@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import '../helper/project_helper.dart';
 import '../model/project_model.dart';
-import '../repeated_function/drawer.dart';
-import '../repeated_function/search_bar.dart';
+import '../drawer_screen/drawer.dart';
+import '../repeated_function/search_screen.dart';
 import '../section_page/movie.dart';
 import '../section_page/tv_series.dart';
 import '../section_page/upcoming.dart';
@@ -53,7 +53,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: DrawerFunction(),
+      drawer: DrawerScreen(),
       backgroundColor: const Color(0xFF121212),
       body: CustomScrollView(
         physics: const BouncingScrollPhysics(),
@@ -295,7 +295,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                 color: const Color(0xFF0E0E0E),
                 child: Column(
                   children: [
-                    const SearchBarFunction(),
+                    const SearchScreen(),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 10),
                       child: TabBar(

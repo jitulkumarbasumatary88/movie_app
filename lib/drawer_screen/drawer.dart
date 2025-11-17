@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:movie_app/drawer_screen/profile_screen.dart';
 
-class DrawerFunction extends StatefulWidget {
-  const DrawerFunction({super.key});
+class DrawerScreen extends StatefulWidget {
+  const DrawerScreen({super.key});
 
   @override
-  State<DrawerFunction> createState() => _DrawerFunctionState();
+  State<DrawerScreen> createState() => _DrawerScreenState();
 }
 
-class _DrawerFunctionState extends State<DrawerFunction> {
+class _DrawerScreenState extends State<DrawerScreen> {
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -39,6 +40,16 @@ class _DrawerFunctionState extends State<DrawerFunction> {
               ),
             ),
             ListTile(
+              leading: Icon(Icons.person, color: Colors.white),
+              title: Text('Profile', style: TextStyle(color: Colors.white)),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ProfileScreen()),
+                );
+              },
+            ),
+            ListTile(
               leading: Icon(Icons.home, color: Colors.white),
               title: Text('Home', style: TextStyle(color: Colors.white)),
             ),
@@ -46,18 +57,10 @@ class _DrawerFunctionState extends State<DrawerFunction> {
               leading: Icon(Icons.favorite, color: Colors.white),
               title: Text('Favorite', style: TextStyle(color: Colors.white)),
             ),
-            // ListTile(
-            //   leading: Icon(Icons.menu_book, color: Colors.white),
-            //   title: Text('Blog', style: TextStyle(color: Colors.white)),
-            // ),
             ListTile(
               leading: Icon(Icons.web, color: Colors.white),
               title: Text('Website', style: TextStyle(color: Colors.white)),
             ),
-            // ListTile(
-            //   leading: Icon(Icons.subscriptions, color: Colors.white),
-            //   title: Text('Subscribe', style: TextStyle(color: Colors.white)),
-            // ),
             ListTile(
               leading: Icon(Icons.info, color: Colors.white),
               title: Text('About', style: TextStyle(color: Colors.white)),

@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import '../model/project_model.dart';
 
-class ReviewUI extends StatefulWidget {
+class ReviewScreen extends StatefulWidget {
   final List<ReviewModel> revDetails;
 
-  const ReviewUI({super.key, required this.revDetails});
+  const ReviewScreen({super.key, required this.revDetails});
 
   @override
-  State<ReviewUI> createState() => _ReviewUIState();
+  State<ReviewScreen> createState() => _ReviewScreenState();
 }
 
-class _ReviewUIState extends State<ReviewUI> {
+class _ReviewScreenState extends State<ReviewScreen> {
   bool showAll = false;
 
   @override

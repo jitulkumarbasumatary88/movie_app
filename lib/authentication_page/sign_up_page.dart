@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:movie_app/authentication_page/sign_in_page.dart';
@@ -137,6 +138,21 @@ class _SignUpPageState extends State<SignUpPage> {
                               email: emailController.text.trim(),
                               password: passwordController.text.trim(),
                             );
+
+                        // 🔥 GET UID OF NEW USER
+                        String uid = FirebaseAuth.instance.currentUser!.uid;
+
+                        // 🔥 CREATE FIRESTORE PROFILE DOCUMENT
+                        await FirebaseFirestore.instance
+                            .collection('users')
+                            .doc(uid)
+                            .set({
+                              "name": nameController.text.trim(),
+                              "email": emailController.text.trim(),
+                              "phone": "",
+                              "bio": "",
+                            });
+
                         // homepage
                         Navigator.pushAndRemoveUntil(
                           context,

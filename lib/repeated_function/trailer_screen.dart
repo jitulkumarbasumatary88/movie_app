@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
-class TrailerWatch extends StatefulWidget {
+class TrailerScreen extends StatefulWidget {
   final String trailerYtID;
 
-  const TrailerWatch({super.key, required this.trailerYtID});
+  const TrailerScreen({super.key, required this.trailerYtID});
 
   @override
-  State<TrailerWatch> createState() => _TrailerWatchState();
+  State<TrailerScreen> createState() => _TrailerScreenState();
 }
 
-class _TrailerWatchState extends State<TrailerWatch> {
+class _TrailerScreenState extends State<TrailerScreen> {
   late YoutubePlayerController _controller;
 
   @override
