@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/drawer_screen/profile_screen.dart';
 
+import '../repeated_function/favourite.dart';
+
 class DrawerScreen extends StatefulWidget {
   const DrawerScreen({super.key});
 
@@ -43,6 +45,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
               leading: Icon(Icons.person, color: Colors.white),
               title: Text('Profile', style: TextStyle(color: Colors.white)),
               onTap: () {
+                Navigator.pop(context); // <-- drawer close
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => ProfileScreen()),
@@ -55,7 +58,14 @@ class _DrawerScreenState extends State<DrawerScreen> {
             ),
             ListTile(
               leading: Icon(Icons.favorite, color: Colors.white),
-              title: Text('Favorite', style: TextStyle(color: Colors.white)),
+              title: Text('Favourite', style: TextStyle(color: Colors.white)),
+              onTap: () {
+                Navigator.pop(context); // <-- drawer close
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => FavoriteListScreen()),
+                );
+              },
             ),
             ListTile(
               leading: Icon(Icons.web, color: Colors.white),

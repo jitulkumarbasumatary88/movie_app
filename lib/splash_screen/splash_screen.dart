@@ -20,7 +20,7 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   void startApp() {
-    Timer(Duration(seconds: 3), () {
+    Timer(Duration(seconds: 4), () {
       User? user = FirebaseAuth.instance.currentUser;
 
       if (user != null) {
@@ -43,7 +43,7 @@ class _SplashScreenState extends State<SplashScreen> {
       body: Container(
         color: Colors.black,
         child: Center(
-          child: Lottie.asset('assets/star.json', width: 200, height: 200),
+          child: Lottie.asset('assets/Movie.json', width: 200, height: 200),
         ),
       ),
     );

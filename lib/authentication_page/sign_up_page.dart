@@ -1,8 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:movie_app/authentication_page/sign_in_page.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../home_page/home_page.dart';
+import 'sign_in_page.dart';
+import 'google_auth_page.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -22,99 +24,89 @@ class _SignUpPageState extends State<SignUpPage> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Padding(
-        padding: EdgeInsets.all(20.0),
+        padding: const EdgeInsets.all(20.0),
         child: Center(
           child: SingleChildScrollView(
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // title
-                Center(
-                  child: Text(
-                    "Sign Up",
-                    style: TextStyle(
-                      // manually color
-                      color: Colors.black,
-                      fontSize: 35,
-                      fontWeight: FontWeight.bold,
-                    ),
+                const Text(
+                  "Sign Up",
+                  style: TextStyle(
+                    fontSize: 35,
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
 
-                SizedBox(height: 40),
+                const SizedBox(height: 40),
 
-                // full name
+                // NAME
                 TextField(
                   controller: nameController,
-                  cursorColor: Colors.black,
-                  style: TextStyle(color: Colors.black),
                   decoration: InputDecoration(
-                    // manually color
-                    labelStyle: TextStyle(color: Colors.grey),
                     labelText: "Full Name",
+                    labelStyle: const TextStyle(color: Colors.grey),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(30),
                     ),
                   ),
+                  cursorColor: Colors.black,
+                  style: const TextStyle(color: Colors.black),
                 ),
 
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
 
-                // email
+                // EMAIL
                 TextField(
                   controller: emailController,
-                  cursorColor: Colors.black,
-                  style: TextStyle(color: Colors.black),
                   decoration: InputDecoration(
-                    // manually color
-                    labelStyle: TextStyle(color: Colors.grey),
                     labelText: "Email",
+                    labelStyle: const TextStyle(color: Colors.grey),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(30),
                     ),
                   ),
+                  cursorColor: Colors.black,
+                  style: const TextStyle(color: Colors.black),
                 ),
 
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
 
-                // password
+                // PASSWORD
                 TextField(
                   controller: passwordController,
                   obscureText: true,
-                  cursorColor: Colors.black,
-                  style: TextStyle(color: Colors.black),
                   decoration: InputDecoration(
-                    // manually color
-                    labelStyle: TextStyle(color: Colors.grey),
                     labelText: "Password",
+                    labelStyle: const TextStyle(color: Colors.grey),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(30),
                     ),
                   ),
+                  cursorColor: Colors.black,
+                  style: const TextStyle(color: Colors.black),
                 ),
 
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
 
-                // confirm password
+                // CONFIRM PASSWORD
                 TextField(
                   controller: confirmController,
                   obscureText: true,
-                  cursorColor: Colors.black,
-                  style: TextStyle(color: Colors.black),
                   decoration: InputDecoration(
-                    // manually color
-                    labelStyle: TextStyle(color: Colors.grey),
                     labelText: "Confirm Password",
+                    labelStyle: const TextStyle(color: Colors.grey),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(30),
                     ),
                   ),
+                  cursorColor: Colors.black,
+                  style: const TextStyle(color: Colors.black),
                 ),
 
-                SizedBox(height: 30),
+                const SizedBox(height: 30),
 
-                // create
+                // CREATE ACCOUNT
                 SizedBox(
                   width: double.infinity,
                   height: 40,
@@ -123,26 +115,27 @@ class _SignUpPageState extends State<SignUpPage> {
                       backgroundColor: Colors.grey,
                     ),
                     onPressed: () async {
-                      // password check
                       if (passwordController.text.trim() !=
                           confirmController.text.trim()) {
                         ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text('Passwords do not match')),
+                          const SnackBar(
+                            content: Center(
+                              child: Text("Passwords do not match"),
+                            ),
+                          ),
                         );
                         return;
                       }
+
                       try {
-                        // firebase sign up
                         await FirebaseAuth.instance
                             .createUserWithEmailAndPassword(
                               email: emailController.text.trim(),
                               password: passwordController.text.trim(),
                             );
 
-                        // 🔥 GET UID OF NEW USER
                         String uid = FirebaseAuth.instance.currentUser!.uid;
 
-                        // 🔥 CREATE FIRESTORE PROFILE DOCUMENT
                         await FirebaseFirestore.instance
                             .collection('users')
                             .doc(uid)
@@ -153,19 +146,19 @@ class _SignUpPageState extends State<SignUpPage> {
                               "bio": "",
                             });
 
-                        // homepage
                         Navigator.pushAndRemoveUntil(
                           context,
-                          MaterialPageRoute(builder: (context) => MyHomePage()),
+                          MaterialPageRoute(
+                            builder: (context) => const MyHomePage(),
+                          ),
                           (route) => false,
                         );
                       } catch (e) {
-                        print('Sign Up Error : $e');
                         ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
+                          const SnackBar(
                             content: Center(
                               child: Text(
-                                'Sign up failed. Please check your details.',
+                                "Sign up failed. Please check your details.",
                               ),
                             ),
                           ),
@@ -175,7 +168,6 @@ class _SignUpPageState extends State<SignUpPage> {
                     child: const Text(
                       "Create Account",
                       style: TextStyle(
-                        fontSize: 15,
                         fontWeight: FontWeight.bold,
                         color: Colors.black,
                       ),
@@ -183,28 +175,111 @@ class _SignUpPageState extends State<SignUpPage> {
                   ),
                 ),
 
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
 
-                // already account? sign in
+                // GOOGLE SIGN-UP
+                SizedBox(
+                  width: double.infinity,
+                  height: 45,
+                  child: OutlinedButton(
+                    onPressed: () async {
+                      final auth = AuthService();
+
+                      final userCredential = await auth.signInWithGoogle();
+
+                      if (userCredential == null) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Center(
+                              child: Text("Google Sign-Up Failed"),
+                            ),
+                          ),
+                        );
+                        return;
+                      }
+
+                      bool isNew = userCredential.additionalUserInfo!.isNewUser;
+
+                      if (!isNew) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Center(
+                              child: Text(
+                                "Account already exists. Please Sign In.",
+                              ),
+                            ),
+                          ),
+                        );
+                        return;
+                      }
+
+                      final uid = FirebaseAuth.instance.currentUser!.uid;
+
+                      await FirebaseFirestore.instance
+                          .collection('users')
+                          .doc(uid)
+                          .set({
+                            "name":
+                                FirebaseAuth
+                                    .instance
+                                    .currentUser!
+                                    .displayName ??
+                                "",
+                            "email":
+                                FirebaseAuth.instance.currentUser!.email ?? "",
+                            "phone": "",
+                            "bio": "",
+                          });
+
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const MyHomePage(),
+                        ),
+                      );
+                    },
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: const [
+                        FaIcon(
+                          FontAwesomeIcons.google,
+                          color: Colors.red,
+                          size: 25,
+                        ),
+                        SizedBox(width: 10),
+                        Text(
+                          "Sign up with Google",
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+
+                const SizedBox(height: 20),
+
+                // GO TO SIGN-IN
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
-                      "Already have an account? ",
-                      // manually color
+                    const Text(
+                      "Already have an account?",
                       style: TextStyle(color: Colors.black),
-
-                      // manually color
                     ),
                     GestureDetector(
                       onTap: () {
                         Navigator.pushReplacement(
                           context,
-                          MaterialPageRoute(builder: (context) => SignInPage()),
+                          MaterialPageRoute(
+                            builder: (context) => const SignInPage(),
+                          ),
                         );
                       },
-                      child: Text(
-                        "Sign In",
+                      child: const Text(
+                        " Sign In",
                         style: TextStyle(
                           color: Colors.blue,
                           fontWeight: FontWeight.bold,

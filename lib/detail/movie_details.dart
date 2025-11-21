@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../helper/project_helper.dart';
 import '../home_page/home_page.dart';
 import '../model/project_model.dart';
+import '../repeated_function/favourite_button.dart';
 import '../repeated_function/review_screen.dart';
 import '../repeated_function/repeated_list.dart';
 import '../repeated_function/trailer_screen.dart';
@@ -141,6 +142,19 @@ class _MovieDetailsState extends State<MovieDetails> {
                     fontWeight: FontWeight.w700,
                   ),
                 ),
+              ),
+
+              const SizedBox(height: 10),
+
+              // Favourite
+              AddFavoriteButton(
+                tmdbid: widget.id.toString(),
+                tmdbtype: "movie",
+                title: (detail['title'] ?? detail['name'] ?? 'Untitled')
+                    .toString(),
+                rating: detail['vote_average']?.toString() ?? "0.0",
+                poster: detail['poster_path'],
+                iconSize: 32,
               ),
 
               const SizedBox(height: 10),

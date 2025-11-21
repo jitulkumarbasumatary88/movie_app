@@ -1,81 +1,79 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:movie_app/authentication_page/sign_up_page.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../home_page/home_page.dart';
+import 'sign_up_page.dart';
+import 'google_auth_page.dart';
 
 class SignInPage extends StatefulWidget {
   const SignInPage({super.key});
 
   @override
-  State<SignInPage> createState() => SignInPageState();
+  State<SignInPage> createState() => _SignInPageState();
 }
 
-class SignInPageState extends State<SignInPage> {
+class _SignInPageState extends State<SignInPage> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+
+  bool loading = false;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Padding(
-        padding: EdgeInsets.all(20.0),
+        padding: const EdgeInsets.all(20.0),
         child: Center(
           child: SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // TITLE
-                Center(
-                  child: Text(
-                    "Sign In",
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 35,
-                      fontWeight: FontWeight.bold,
-                    ),
+                const Text(
+                  "Sign In",
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 35,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
 
-                SizedBox(height: 40),
+                const SizedBox(height: 40),
 
-                // EMAIL FIELD
+                // EMAIL
                 TextField(
                   controller: emailController,
                   cursorColor: Colors.black,
-                  style: TextStyle(color: Colors.black),
+                  style: const TextStyle(color: Colors.black),
                   decoration: InputDecoration(
-                    // manually color
-                    labelStyle: TextStyle(color: Colors.grey),
                     labelText: "Email",
+                    labelStyle: const TextStyle(color: Colors.grey),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(30),
                     ),
                   ),
                 ),
 
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
 
-                // PASSWORD FIELD
+                // PASSWORD
                 TextField(
                   controller: passwordController,
                   obscureText: true,
                   cursorColor: Colors.black,
-                  style: TextStyle(color: Colors.black),
+                  style: const TextStyle(color: Colors.black),
                   decoration: InputDecoration(
-                    // manually color
-                    labelStyle: TextStyle(color: Colors.grey),
                     labelText: "Password",
+                    labelStyle: const TextStyle(color: Colors.grey),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(30),
                     ),
                   ),
                 ),
 
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
 
-                // login
+                // EMAIL SIGN-IN
                 SizedBox(
                   width: double.infinity,
                   height: 40,
@@ -85,21 +83,21 @@ class SignInPageState extends State<SignInPage> {
                     ),
                     onPressed: () async {
                       try {
-                        // firebase sign in
                         await FirebaseAuth.instance.signInWithEmailAndPassword(
                           email: emailController.text.trim(),
                           password: passwordController.text.trim(),
                         );
-                        // homepage
+
                         Navigator.pushAndRemoveUntil(
                           context,
-                          MaterialPageRoute(builder: (context) => MyHomePage()),
+                          MaterialPageRoute(
+                            builder: (context) => const MyHomePage(),
+                          ),
                           (route) => false,
                         );
                       } catch (e) {
-                        print('Login Error : $e');
                         ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
+                          const SnackBar(
                             content: Center(
                               child: Text('Invalid Email or Password'),
                             ),
@@ -107,38 +105,110 @@ class SignInPageState extends State<SignInPage> {
                         );
                       }
                     },
-                    child: Text(
+                    child: const Text(
                       "Sign In",
                       style: TextStyle(
+                        color: Colors.black,
                         fontSize: 15,
                         fontWeight: FontWeight.bold,
-                        color: Colors.black,
                       ),
                     ),
                   ),
                 ),
 
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
 
-                // sign up
+                // GOOGLE SIGN-IN
+                SizedBox(
+                  width: double.infinity,
+                  height: 45,
+                  child: OutlinedButton(
+                    onPressed: () async {
+                      if (loading) return;
+                      setState(() => loading = true);
+
+                      final auth = AuthService();
+
+                      final userCredential = await auth.signInWithGoogle();
+
+                      setState(() => loading = false);
+
+                      if (userCredential == null) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Center(
+                              child: Text("Google Sign-In Failed"),
+                            ),
+                          ),
+                        );
+                        return;
+                      }
+
+                      bool isNew = userCredential.additionalUserInfo!.isNewUser;
+
+                      if (isNew) {
+                        await FirebaseAuth.instance.currentUser?.delete();
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Center(
+                              child: Text(
+                                "Account not found. Please Sign Up first.",
+                              ),
+                            ),
+                          ),
+                        );
+                        return;
+                      }
+
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const MyHomePage(),
+                        ),
+                      );
+                    },
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: const [
+                        FaIcon(
+                          FontAwesomeIcons.google,
+                          color: Colors.red,
+                          size: 25,
+                        ),
+                        SizedBox(width: 10),
+                        Text(
+                          "Sign in with Google",
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+
+                const SizedBox(height: 20),
+
+                // GO TO SIGN-UP
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
-                      "Don’t have an account? ",
-
-                      // manually color
+                    const Text(
+                      "Don’t have an account?",
                       style: TextStyle(color: Colors.black),
                     ),
                     GestureDetector(
                       onTap: () {
                         Navigator.pushReplacement(
                           context,
-                          MaterialPageRoute(builder: (context) => SignUpPage()),
+                          MaterialPageRoute(
+                            builder: (context) => const SignUpPage(),
+                          ),
                         );
                       },
-                      child: Text(
-                        "Sign Up",
+                      child: const Text(
+                        " Sign Up",
                         style: TextStyle(
                           color: Colors.blue,
                           fontWeight: FontWeight.bold,

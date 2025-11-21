@@ -185,7 +185,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                             CachedNetworkImage(
                               imageUrl:
                                   'https://image.tmdb.org/t/p/w500${i.posterPath}',
-                              fit: BoxFit.cover,
+                              fit: BoxFit.fill,
                               errorWidget: (_, __, ___) => Container(
                                 color: Colors.black26,
                                 child: const Icon(
