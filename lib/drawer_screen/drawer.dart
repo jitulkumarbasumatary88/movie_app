@@ -52,10 +52,10 @@ class _DrawerScreenState extends State<DrawerScreen> {
                 );
               },
             ),
-            ListTile(
-              leading: Icon(Icons.home, color: Colors.white),
-              title: Text('Home', style: TextStyle(color: Colors.white)),
-            ),
+            // ListTile(
+            //   leading: Icon(Icons.home, color: Colors.white),
+            //   title: Text('Home', style: TextStyle(color: Colors.white)),
+            // ),
             ListTile(
               leading: Icon(Icons.favorite, color: Colors.white),
               title: Text('Favourite', style: TextStyle(color: Colors.white)),
@@ -67,18 +67,18 @@ class _DrawerScreenState extends State<DrawerScreen> {
                 );
               },
             ),
-            ListTile(
-              leading: Icon(Icons.web, color: Colors.white),
-              title: Text('Website', style: TextStyle(color: Colors.white)),
-            ),
-            ListTile(
-              leading: Icon(Icons.info, color: Colors.white),
-              title: Text('About', style: TextStyle(color: Colors.white)),
-            ),
-            ListTile(
-              leading: Icon(Icons.exit_to_app, color: Colors.white),
-              title: Text('Exit', style: TextStyle(color: Colors.white)),
-            ),
+            // ListTile(
+            //   leading: Icon(Icons.web, color: Colors.white),
+            //   title: Text('Website', style: TextStyle(color: Colors.white)),
+            // ),
+            // ListTile(
+            //   leading: Icon(Icons.info, color: Colors.white),
+            //   title: Text('About', style: TextStyle(color: Colors.white)),
+            // ),
+            // ListTile(
+            //   leading: Icon(Icons.exit_to_app, color: Colors.white),
+            //   title: Text('Exit', style: TextStyle(color: Colors.white)),
+            // ),
           ],
         ),
       ),

@@ -96,6 +96,7 @@ class _MovieDetailsState extends State<MovieDetails> {
         slivers: [
           SliverAppBar(
             backgroundColor: const Color.fromRGBO(18, 18, 18, 0.9),
+            // icon
             leading: IconButton(
               icon: const Icon(
                 FontAwesomeIcons.circleArrowLeft,
